@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { PropsWithChildren, useState } from "react";
 import { TasksQuestions } from "../api";
 import {
   Drawer,
@@ -81,7 +81,13 @@ const DrawerHeader = styled("div")(({ theme }: any) => ({
   justifyContent: "space-between",
 }));
 
-const Sidebar = ({ questions, onSelect, selectedId, taskTitle }: Props) => {
+const Sidebar = ({
+  questions,
+  onSelect,
+  selectedId,
+  taskTitle,
+  children,
+}: PropsWithChildren<Props>) => {
   const [open, setOpen] = useState(true);
 
   const handleDrawerOpen = () => {
@@ -168,6 +174,10 @@ const Sidebar = ({ questions, onSelect, selectedId, taskTitle }: Props) => {
             ))}
           </List>
         </Drawer>
+        <Main open={open}>
+          <DrawerHeader />
+          {children}
+        </Main>
       </Box>
     </>
   );

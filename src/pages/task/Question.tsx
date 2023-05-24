@@ -7,15 +7,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { TasksQuestions } from "./api";
 
-const data = {
-  title: "question 1",
-  description: "solve it!",
-  grade: null,
-  id: 1,
-  solved: false,
+type Props = {
+  data: TasksQuestions;
 };
-export const Question = () => {
+
+export const Question = ({ data }: Props) => {
   return (
     <Box m={4}>
       <Box sx={{ marginBottom: "10px", marginTop: "10px" }}>
@@ -33,7 +31,7 @@ export const Question = () => {
           <MenuItem value={2}>java</MenuItem>
         </Select>
       </Stack>
-      <TextField fullWidth multiline label="Inter your code..." rows={10} />
+      <TextField fullWidth multiline label="Inter your code..." minRows={10} />
       <Stack direction="row" justifyContent="space-between">
         <Button sx={{ m: "10px" }} variant="contained">
           submit

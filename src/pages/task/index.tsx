@@ -3,6 +3,7 @@ import Sidebar from "./sidebar";
 import { useQuery } from "@tanstack/react-query";
 import { TasksQuestions, getTasksQuestions } from "./api";
 import { useState } from "react";
+import { Question } from "./Question";
 
 const Task = () => {
   const [selectedQuestion, setSelectedQuestion] =
@@ -21,8 +22,9 @@ const Task = () => {
         onSelect={(id) =>
           setSelectedQuestion(task?.questions.find((q) => q.id === id) || null)
         }
-      ></Sidebar>
-      <Button variant="contained">Hello</Button>
+      >
+        {selectedQuestion && <Question data={selectedQuestion} />}
+      </Sidebar>
     </div>
   );
 };
