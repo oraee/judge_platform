@@ -15,6 +15,9 @@ import {
   AppBarProps as muiAppBarProps,
   Box,
   CircularProgress,
+  ListItemIcon,
+  Badge,
+  Chip,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -136,10 +139,30 @@ const Sidebar = ({ questions, onSelect, selectedId, taskTitle }: Props) => {
                 disablePadding
                 sx={{
                   backgroundColor: selectedId === question.id && "#1111",
+                  display: "flex",
+                  justifyContent: "space-between",
                 }}
               >
                 <ListItemButton onClick={() => onSelect?.(question.id)}>
                   <ListItemText primary={question.title} />
+                  {question.grade !== null && (
+                    <ListItemIcon>
+                      <Chip
+                        size="small"
+                        sx={{
+                          width: "40px",
+                        }}
+                        label={question.grade}
+                        color={
+                          question.grade === 100
+                            ? "success"
+                            : question.grade === 0
+                            ? "error"
+                            : "warning"
+                        }
+                      />
+                    </ListItemIcon>
+                  )}
                 </ListItemButton>
               </ListItem>
             ))}
