@@ -18,6 +18,7 @@ import {
   ListItemIcon,
   Badge,
   Chip,
+  Stack,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -138,13 +139,18 @@ const Sidebar = ({
           </DrawerHeader>
           <Divider />
           <List>
-            {!questions && <CircularProgress />}
+            {!questions && (
+              <Stack alignItems="center">
+                <CircularProgress />
+              </Stack>
+            )}
             {questions?.map((question) => (
               <ListItem
                 key={question.id}
                 disablePadding
                 sx={{
-                  backgroundColor: selectedId === question.id && "#1111",
+                  backgroundColor:
+                    selectedId === question.id ? "#1111" : "transparent",
                   display: "flex",
                   justifyContent: "space-between",
                 }}
