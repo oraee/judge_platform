@@ -22,6 +22,7 @@ const Task = () => {
         onSelect={(id) =>
           setSelectedQuestion(task?.questions.find((q) => q.id === id) || null)
         }
+        timer={!task ? 0 : task?.time}
       >
         {selectedQuestion && <Question data={selectedQuestion} />}
       </Sidebar>
