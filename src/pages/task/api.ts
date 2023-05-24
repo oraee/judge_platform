@@ -1,3 +1,5 @@
+import { fakeApi } from "../../helpers/fakeApi";
+
 export type TasksQuestions = {
   title: string;
   description: string;
@@ -34,6 +36,7 @@ export const getTasksQuestions = async (task: number) => {
       },
     ] as TasksQuestions[],
     time: 456564654564,
+    title: "task",
   };
 };
 
