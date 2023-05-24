@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useState } from "react";
 import { TasksQuestions } from "../api";
 import {
   Drawer,
@@ -16,18 +16,19 @@ import {
   Box,
   CircularProgress,
   ListItemIcon,
-  Badge,
   Chip,
   Stack,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { Timer } from "../timer";
 
 type Props = {
   questions?: TasksQuestions[];
   selectedId?: number;
   onSelect?: (id: number) => void;
   taskTitle?: string;
+  timer: number;
 };
 const drawerWidth = 240;
 
@@ -88,6 +89,7 @@ const Sidebar = ({
   selectedId,
   taskTitle,
   children,
+  timer,
 }: PropsWithChildren<Props>) => {
   const [open, setOpen] = useState(true);
 
@@ -113,9 +115,14 @@ const Sidebar = ({
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              {taskTitle}
-            </Typography>
+            <Stack
+              sx={{ width: "100%" }}
+              direction="row"
+              justifyContent="space-between"
+            >
+              <Typography variant="h6">{taskTitle}</Typography>
+              <Timer expTime={timer} />
+            </Stack>
           </Toolbar>
         </AppBar>
         <Drawer
