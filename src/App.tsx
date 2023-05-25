@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import QuestionPool from "./pages/dashboard/questionPool";
 import TaskCreation from "./pages/dashboard/taskCreation";
 import UserManagement from "./pages/dashboard/userRegistration";
+import TaskList from "./pages/dashboard/taskList";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="question-pool/" element={<QuestionPool />} />
         <Route path="task-creation/" element={<TaskCreation />} />
         <Route path="user-management/" element={<UserManagement />} />
+        <Route path="task-list/" element={<TaskList />} />
       </Routes>
     </QueryClientProvider>
   );
