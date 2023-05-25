@@ -1,7 +1,8 @@
-import { IconButton, Stack } from "@mui/material";
+import { Button, IconButton, Stack } from "@mui/material";
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useState } from "react";
 
 type Question = {
   title: string;
@@ -12,10 +13,15 @@ type Question = {
 type Props = {
   isQuestionTable: boolean;
   questionsList: Question[];
+  onEdit?: (id: number) => void;
 };
 
-export const CustomTable = ({ isQuestionTable, questionsList }: Props) => {
-  const handleEdit = (id: number) => {};
+export const CustomTable = ({
+  isQuestionTable,
+  questionsList,
+  onEdit,
+}: Props) => {
+  const [selectionsList, setSelectionsList] = useState<number[]>([]);
   const handleDelete = (id: number) => {};
   const selectableQuestion: GridColDef[] = [
     { field: "id", headerName: "id" },
@@ -34,7 +40,7 @@ export const CustomTable = ({ isQuestionTable, questionsList }: Props) => {
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Stack direction="row">
-            <IconButton onClick={() => handleEdit(params.row.id)}>
+            <IconButton onClick={() => onEdit && onEdit(params.row.id)}>
               <EditIcon />
             </IconButton>
             <IconButton onClick={() => handleDelete(params.row.id)}>
@@ -47,10 +53,26 @@ export const CustomTable = ({ isQuestionTable, questionsList }: Props) => {
   ];
 
   return (
-    <DataGrid
-      rows={questionsList || []}
-      checkboxSelection={!isQuestionTable}
-      columns={isQuestionTable ? editableQuestion : selectableQuestion}
-    />
+    <>
+      <DataGrid
+        rows={questionsList || []}
+        checkboxSelection={!isQuestionTable}
+        onRowSelectionModelChange={(list) =>
+          setSelectionsList(list as number[])
+        }
+        columns={isQuestionTable ? editableQuestion : selectableQuestion}
+      />
+      {!!selectionsList.length && !isQuestionTable && (
+        <Button
+          variant="contained"
+          sx={{ mt: 4 }}
+          onClick={() => {
+            console.log(selectionsList);
+          }}
+        >
+          add
+        </Button>
+      )}
+    </>
   );
 };
