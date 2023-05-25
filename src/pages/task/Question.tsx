@@ -9,12 +9,15 @@ import {
   Typography,
 } from "@mui/material";
 import { TasksQuestions } from "./api";
-
+import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
+import { language } from "../../helpers/Language";
+import { useState } from "react";
 type Props = {
   data: TasksQuestions;
 };
 
 export const Question = ({ data }: Props) => {
+  const [selectedLanguage, setSelectedLanguage] = useState("Python (3.8.1)");
   return (
     <Box m={4}>
       <Box sx={{ marginBottom: "10px", marginTop: "10px" }}>
@@ -22,7 +25,6 @@ export const Question = ({ data }: Props) => {
           <Typography variant="h4" gutterBottom>
             {data.title}
           </Typography>
-
           <Chip
             sx={{
               width: "60px",
@@ -43,13 +45,31 @@ export const Question = ({ data }: Props) => {
         </Typography>
       </Box>
       <Stack direction="row" justifyContent="end">
-        <Select sx={{ margin: "10px" }} label="Language" value={0}>
-          <MenuItem value={0}>python</MenuItem>
-          <MenuItem value={1}>react js</MenuItem>
-          <MenuItem value={2}>java</MenuItem>
+        <Select
+          sx={{ margin: "10px" }}
+          label="Language"
+          defaultValue={71}
+          onChange={(e) => {
+            console.log(
+              language.find((l) => l.id === e.target.value)?.editorName || ""
+            );
+
+            setSelectedLanguage(
+              language.find((l) => l.id === e.target.value)?.editorName || ""
+            );
+          }}
+        >
+          {language.map((l) => (
+            <MenuItem value={l.id}>{l.name}</MenuItem>
+          ))}
         </Select>
       </Stack>
-      <TextField fullWidth multiline label="Inter your code..." minRows={10} />
+      <Editor
+        height="50vh"
+        defaultValue="// some comment"
+        language={selectedLanguage}
+        theme="vs-dark"
+      />
       <Stack direction="row" justifyContent="space-between">
         <Button sx={{ m: "10px" }} variant="contained">
           submit

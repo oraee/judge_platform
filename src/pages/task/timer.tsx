@@ -21,8 +21,6 @@ export const Timer = (props: { expTime: number; onTimeOut: () => void }) => {
     }
   }, [timer]);
 
-  console.log(timer);
-
   return (
     <>
       {timer > 0 && (
