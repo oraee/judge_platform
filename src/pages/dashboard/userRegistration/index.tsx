@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, CircularProgress, Stack } from "@mui/material";
 import Layout from "../layout";
 import UserTable from "./userTable";
 import { useQuery } from "@tanstack/react-query";
@@ -31,11 +31,15 @@ const UserManagement = () => {
         </Box>
 
         <Box>
-          <UserTable
-            users={users || []}
-            onEdit={handleOpenEditDialog}
-            onDelete={(id) => console.log(id)}
-          />
+          {users ? (
+            <UserTable
+              users={users || []}
+              onEdit={handleOpenEditDialog}
+              onDelete={(id) => console.log(id)}
+            />
+          ) : (
+            <CircularProgress />
+          )}
         </Box>
       </Stack>
 

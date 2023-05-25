@@ -29,6 +29,7 @@ type Props = {
   onSelect?: (id: number) => void;
   taskTitle?: string;
   timer: number;
+  onTimeOut: () => void;
 };
 const drawerWidth = 240;
 
@@ -90,6 +91,7 @@ const Sidebar = ({
   taskTitle,
   children,
   timer,
+  onTimeOut,
 }: PropsWithChildren<Props>) => {
   const [open, setOpen] = useState(true);
 
@@ -121,7 +123,7 @@ const Sidebar = ({
               justifyContent="space-between"
             >
               <Typography variant="h6">{taskTitle}</Typography>
-              <Timer expTime={timer} />
+              {timer && <Timer expTime={timer} onTimeOut={onTimeOut} />}
             </Stack>
           </Toolbar>
         </AppBar>

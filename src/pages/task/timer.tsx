@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
-export const Timer = (props: { expTime: number }) => {
+export const Timer = (props: { expTime: number; onTimeOut: () => void }) => {
   const [timer, setTimer] = useState(0);
 
   useEffect(() => {
@@ -14,6 +14,14 @@ export const Timer = (props: { expTime: number }) => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (timer < 0) {
+      props.onTimeOut();
+    }
+  }, [timer]);
+
+  console.log(timer);
 
   return (
     <>

@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Chip,
   MenuItem,
   Select,
   Stack,
@@ -17,9 +18,26 @@ export const Question = ({ data }: Props) => {
   return (
     <Box m={4}>
       <Box sx={{ marginBottom: "10px", marginTop: "10px" }}>
-        <Typography sx={{ ml: 2 }} variant="h4" gutterBottom>
-          {data.title}
-        </Typography>
+        <Stack direction="row" justifyContent="space-between" sx={{ mx: 2 }}>
+          <Typography variant="h4" gutterBottom>
+            {data.title}
+          </Typography>
+
+          <Chip
+            sx={{
+              width: "60px",
+              fontWeight: "bold",
+            }}
+            label={data.grade}
+            color={
+              data.grade === 100
+                ? "success"
+                : data.grade === 0
+                ? "error"
+                : "warning"
+            }
+          />
+        </Stack>
         <Typography sx={{ ml: 4 }} variant="h6" gutterBottom>
           {data.description}
         </Typography>

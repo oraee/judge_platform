@@ -35,7 +35,7 @@ export const getTasksQuestions = async (task: number) => {
         solved: false,
       },
     ] as TasksQuestions[],
-    time: 1685936476323,
+    time: 1685006144204,
     title: "task",
   };
 };
