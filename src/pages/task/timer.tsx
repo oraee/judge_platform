@@ -7,12 +7,14 @@ export const Timer = (props: { expTime: number }) => {
   useEffect(() => {
     setTimer(props.expTime - new Date().getTime());
   }, [props.expTime]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer((pre) => pre - 1000);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
   return (
     <>
       {timer > 0 && (

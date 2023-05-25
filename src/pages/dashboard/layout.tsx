@@ -159,6 +159,15 @@ const Layout = ({ children, title }: PropsWithChildren<Props>) => {
           >
             <ListItemText primary="User Management" />
           </ListItemButton>
+
+          <ListItemButton
+            onClick={() => navigate("/task-list")}
+            sx={{
+              backgroundColor: "/task-list" === location.pathname && "#1111",
+            }}
+          >
+            <ListItemText primary="Task List" />
+          </ListItemButton>
         </List>
       </Drawer>
       <Main open={open}>
